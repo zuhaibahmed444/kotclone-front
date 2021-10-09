@@ -41,12 +41,13 @@
   </a>
 
   <button
+    (click) ="backtor()"
     *ngIf="isLoggedIn && user"
     class="example-icon favorite-icon ml20"
     mat-button
-    routerLink="/user-dashboard/0"
     aria-label="Example icon-button with heart icon"
   >
-    {{ user.username }}
+  DashBoard
   </button>
+  
 </mat-toolbar>

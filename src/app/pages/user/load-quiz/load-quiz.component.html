@@ -1,5 +1,9 @@
 <div class="bootstrap-wrapper">
   <div class="container-fluid">
+    <h1 style="text-align: center;">WELCOME</h1>
+    <h1 style="text-align: center; font: oblique;">{{user.firstName}} {{user.lastName}}</h1>
+  </div>
+  <div class="container-fluid">
     <h1 class="mt20">Available Quizzes</h1>
     <div class="row mt20" *ngIf="quizzes">
       <div class="col-md-4" *ngFor="let q of quizzes">

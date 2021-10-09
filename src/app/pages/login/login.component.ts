@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
         this.login.getCurrentUser().subscribe((user: any) => {
           this.login.setUser(user);
           console.log(user);
+          console.log(user.subscribed)
           //redirect ...ADMIN: admin-dashboard
           //redirect ...NORMAL:normal-dashboard
           if (this.login.getUserRole() == 'ADMIN') {
@@ -65,13 +66,19 @@ export class LoginComponent implements OnInit {
             // window.location.href = '/admin';
             this.router.navigate(['admin']);
             this.login.loginStatusSubject.next(true);
-          } else if (this.login.getUserRole() == 'NORMAL') {
+          } else if (this.login.getUserRole() == 'NORMAL' && this.login.getUsersub()) {
             //normal user dashbaord
             // window.location.href = '/user-dashboard';
             this.router.navigate(['user-dashboard/0']);
             this.login.loginStatusSubject.next(true);
-          } else {
+          }else if(this.login.getUserRole() == 'NORMAL'){
+            this.router.navigate(['userwelcome']);
+            this.login.loginStatusSubject.next(true);
+          }
+           else {
+            this.router.navigate(['/'])
             this.login.logout();
+            
           }
         });
       },

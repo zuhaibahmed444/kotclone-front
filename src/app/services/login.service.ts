@@ -16,6 +16,22 @@ export class LoginService {
     return this.http.get(`${baseUrl}/current-user`);
   }
 
+  //get user count
+  //current user: which is loggedin
+  public getUserCount() {
+    return this.http.get(`${baseUrl}/user/count`);
+  }
+
+  //get category count
+  public getCategoryCount() {
+    return this.http.get(`${baseUrl}/category/count`);
+  }
+
+  //get category count
+  public getQuizCount() {
+    return this.http.get(`${baseUrl}/quiz/count`);
+  }
+
   //generate token
 
   public generateToken(loginData: any) {
@@ -72,5 +88,32 @@ export class LoginService {
   public getUserRole() {
     let user = this.getUser();
     return user.authorities[0].authority;
+  }
+
+  public getUsersub() {
+    let user = this.getUser();
+    return user.subscribed
+  }
+
+  public getCount(){
+    let count = this.getUserCount();
+    return count
+  }
+
+  public getCatCount(){
+    let count1 = this.getCategoryCount();
+    return count1
+  }
+
+  public getQuCount(){
+    let count2 = this.getQuizCount();
+    return count2
+  }
+
+  public updateUser(){
+    let uss = this.getUser();
+    uss.subscribed = true
+    this.setUser(uss)
+    console.log(uss)
   }
 }

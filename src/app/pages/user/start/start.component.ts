@@ -6,6 +6,7 @@ import { QuestionService } from 'src/app/services/question.service';
 import { QuizService } from 'src/app/services/quiz.service';
 import Swal from 'sweetalert2';
 import { LoginService } from 'src/app/services/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -31,6 +32,11 @@ export class StartComponent implements OnInit {
   marksGot = 0;
   correctAnswers = 0;
   attempted = 0;
+  evalreturn={
+    marksgained:'',
+    attempt:'',
+    correct:''
+  }
 
   isSubmit = false;
 
@@ -46,7 +52,8 @@ export class StartComponent implements OnInit {
     private _route: ActivatedRoute,
     private _question: QuestionService,
     private _quiz: QuizService,
-    public login: LoginService
+    public login: LoginService,
+    private snack: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -154,7 +161,25 @@ export class StartComponent implements OnInit {
     console.log('Correct Answers :' + this.correctAnswers);
     console.log('Marks Got ' + this.marksGot);
     console.log('attempted ' + this.attempted);
-    console.log(this.questions);
+    // console.log(this.questions);
+    this.evalreturn.attempt = String(this.attempted)
+    this.evalreturn.correct = String(this.correctAnswers)
+    this.evalreturn.marksgained = String(this.marksGot)
+
+    this._question.evalmail(this.evalreturn).subscribe(
+      (data:any) =>{
+          console.log(data)
+          Swal.fire('Successfully done !!', 'Mail sent to your mail id ', 'success')
+      },(error)=>{
+            console.log(error);
+            this.snack.open(error.error.text, '', {
+              duration: 4000,
+            });
+      });
+      
+      
+    
+
   }
   printPage(){
         const x = window.print();

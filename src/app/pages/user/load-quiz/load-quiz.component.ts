@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 import { QuizService } from 'src/app/services/quiz.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { QuizService } from 'src/app/services/quiz.service';
 export class LoadQuizComponent implements OnInit {
   catId;
   quizzes;
-  constructor(private _route: ActivatedRoute, private _quiz: QuizService) {}
+  user;
+  constructor(private _route: ActivatedRoute, private _quiz: QuizService,private login :LoginService) {}
 
   ngOnInit(): void {
     this._route.params.subscribe((params) => {
@@ -42,5 +44,14 @@ export class LoadQuizComponent implements OnInit {
         );
       }
     });
+
+    this.login.getCurrentUser().subscribe(
+      (data:any)=>{
+        this.user = data;
+        console.log(this.user)
+      }
+    )
   }
+
+
 }

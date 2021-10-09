@@ -20,12 +20,19 @@ import { StartComponent } from './pages/user/start/start.component';
 import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
 import { AdminGuard } from './services/admin.guard';
 import { NormalGuard } from './services/normal.guard';
+import { UserWelcomeComponent } from './pages/user/user-welcome/user-welcome.component';
+import {SuccessComponent} from './pages/success/success.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
+  },
+  {
+    path:'profile',
+    component:ProfileComponent,
+    pathMatch :'full',
   },
   {
     path: 'signup',
@@ -38,6 +45,16 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path:'userwelcome',
+    component:UserWelcomeComponent,
+    pathMatch:'full',
+  },
+  {
+    path:'success',
+    component:SuccessComponent,
+    pathMatch:'full'
+  },
+  {
     path: 'admin',
     component: DashboardComponent,
     canActivate: [AdminGuard],
@@ -46,10 +63,7 @@ const routes: Routes = [
         path: '',
         component: WelcomeComponent,
       },
-      {
-        path: 'profile',
-        component: ProfileComponent,
-      },
+      
       {
         path: 'categories',
         component: ViewCategoriesComponent,

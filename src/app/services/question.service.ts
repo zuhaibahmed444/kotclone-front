@@ -29,4 +29,9 @@ export class QuestionService {
   public evalQuiz(questions) {
     return this._http.post(`${baseUrl}/question/eval-quiz`, questions);
   }
+  //
+  public evalmail(evalreturn){
+    return this._http.post(`${baseUrl}/question/eval-mail`, evalreturn);
+  }
+
 }

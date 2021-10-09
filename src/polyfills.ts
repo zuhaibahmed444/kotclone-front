@@ -59,7 +59,11 @@
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
-
+declare global {
+    interface Window {
+        Razorpay: any;
+    }
+ }
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
